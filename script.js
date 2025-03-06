@@ -294,7 +294,9 @@ btnClose.addEventListener("click", (e) => {
   e.preventDefault();
 
   if (
+    inputCloseUsername.value !== "" &&
     inputCloseUsername.value === currentAccount.userName &&
+    Number(inputClosePin.value) !== "" &&
     Number(inputClosePin.value) === currentAccount.pin
   ) {
     const index = accounts.findIndex(
@@ -312,6 +314,17 @@ btnClose.addEventListener("click", (e) => {
         currentAccount.owner.split(" ")[0]
       }, your ccount has been closed ⛔`
     );
+
+    inputLoginUsername.style.opacity = 100;
+    inputLoginPin.style.opacity = 100;
+    btnLogin.style.opacity = 100;
+
+    inputLoginPin.value = "";
+    inputLoginUsername.value = "";
+  } else {
+    alert(`Invalid credentials`);
+    inputCloseUsername.value = "";
+    inputClosePin.value = "";
   }
 });
 
