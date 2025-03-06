@@ -57,14 +57,14 @@
       <!-- MOVEMENTS -->
       <div class="movements">
         <div class="movements__row">
-          <div class="movements__type movements__type--deposit">2 deposit</div>
+          <div class="movements__type movements__type--credited">
+            2 credited
+          </div>
           <div class="movements__date">3 days ago</div>
           <div class="movements__value">4000₹</div>
         </div>
         <div class="movements__row">
-          <div class="movements__type movements__type--withdrawal">
-            1 withdrawal
-          </div>
+          <div class="movements__type movements__type--debited">1 debited</div>
           <div class="movements__date">24/01/2037</div>
           <div class="movements__value">-378₹</div>
         </div>
@@ -94,6 +94,7 @@
             type="number"
             class="form__input form__input--amount"
             placeholder="amount"
+            min="1"
           />
           <button class="form__btn form__btn--transfer">&rarr;</button>
           <label class="form__label">Transfer to</label>

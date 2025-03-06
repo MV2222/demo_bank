@@ -124,7 +124,7 @@ const displayMovements = (movements, sort = false) => {
   const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
 
   movs.forEach((mov, i) => {
-    const type = mov > 0 ? "deposit" : "withdrawal";
+    const type = mov > 0 ? "credited" : "debited";
 
     const html = `
       <div class="movements__row">
@@ -233,29 +233,31 @@ btnTransfer.addEventListener("click", (e) => {
     (acc) => acc.userName === inputTransferTo.value
   );
 
-  if (
-    transferAmount > 0 &&
-    receiverAcocunt &&
-    currentAccount.balance >= transferAmount &&
-    receiverAcocunt?.userName !== currentAccount.userName
-  ) {
-    currentAccount.movements.push(-transferAmount);
-    receiverAcocunt.movements.push(transferAmount);
+  if (receiverAcocunt) {
+    if (
+      currentAccount.balance >= transferAmount &&
+      receiverAcocunt?.userName !== currentAccount.userName
+    ) {
+      currentAccount.movements.push(-transferAmount);
+      receiverAcocunt.movements.push(transferAmount);
 
-    alert(
-      `${transferAmount}₹ was successfully transfered to ${
-        receiverAcocunt.owner.split(" ")[0]
-      } ✅`
-    );
+      alert(
+        `${transferAmount}₹ was successfully transfered to ${
+          receiverAcocunt.owner.split(" ")[0]
+        } ✅`
+      );
 
-    updateUI(currentAccount);
+      updateUI(currentAccount);
+    } else {
+      alert(`Insufficient balance ⛔`);
+    }
   } else {
-    alert(`Insufficient balance ⛔`);
+    alert(`Invalid user`);
   }
 
   inputTransferTo.value = inputTransferAmount.value = "";
-  inputTransferTo.blur();
-  inputTransferAmount.blur();
+  // inputTransferTo.blur();
+  // inputTransferAmount.blur();
 });
 
 // Event Loan Aplly
